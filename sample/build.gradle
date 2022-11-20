@@ -31,14 +31,56 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    /*
+    buildFeatures {
+        viewBinding true
+    }*/
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "$compose_compiler_version"
+    }
+
 }
 
 dependencies {
+    /* compose */
+    // https://developer.android.com/jetpack/compose/setup#groovy
+    def composeBom = platform('androidx.compose:compose-bom:2022.11.00')
+    implementation composeBom
+    androidTestImplementation composeBom
+    // Material Design 3
+    implementation 'androidx.compose.material3:material3'
+    // or Material Design 2
+    // implementation 'androidx.compose.material:material'
+    // implementation 'androidx.compose.foundation:foundation'
 
+    // Android Studio Preview support
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+//    // compose
+//    implementation "androidx.compose.material:material:$compose_version"
+//    implementation "androidx.compose.ui:ui:$compose_version"
+//    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+//    implementation "androidx.compose.foundation:foundation:$compose_version"
+
+    // compiler
+    implementation "androidx.compose.compiler:compiler:$compose_compiler_version"
+    // Optional - Integration with activities
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
+
+
+    /* ktx */
     implementation "androidx.core:core-ktx:$core_ktx_version"
     // implementation 'androidx.appcompat:appcompat:1.5.1'
     // without material theme will not compile
     implementation "com.google.android.material:material:$material_version"
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
