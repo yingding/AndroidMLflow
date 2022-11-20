@@ -15,6 +15,4 @@
  */
 package com.github.yingding.androidmlflow.pipeline
 
-class Test {
-
-}
+class Test
