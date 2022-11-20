@@ -8,7 +8,12 @@ Inspired by kubeflow, airflow, tensorflow-extended, AndroidMLflow is a library t
 * Tensorflow Lite Android
 * Flow
 
-
+## Use spotless
+```console
+./gradlew build
+./gradlew spotlessApply
+./gradlew build
+```
 ## License
 
 ```
