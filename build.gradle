@@ -6,7 +6,7 @@ buildscript {
         namespace = 'com.github.yingding.androidmlflow'
         buildToolsVersion = "33.0.0" // "32.0.0"
         compileSdk = 33
-        applicationId = "com.github.yingding.androidmlflow"
+        applicationId = namespace
         minSdk = 21
         targetSdk = 32
         versionCode = 1
