@@ -47,7 +47,8 @@ android {
 dependencies {
     /* compose */
     // https://developer.android.com/jetpack/compose/setup#groovy
-    def composeBom = platform('androidx.compose:compose-bom:2022.11.00')
+
+    def composeBom = platform("androidx.compose:compose-bom:$compose_bom_version")
     implementation composeBom
     androidTestImplementation composeBom
     // Material Design 3
