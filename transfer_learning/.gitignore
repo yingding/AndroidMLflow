@@ -1,0 +1,14 @@
+#/tmp
+#/tmp/**
+#/saved_model
+#/saved_model/**
+
+**/model
+**/model/**
+
+**/data
+**/data/**
+
+# ignore all __pycache__
+**/__pycache__/
+
