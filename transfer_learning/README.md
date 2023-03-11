@@ -10,5 +10,6 @@ source $HOME/VENV/tflite3.10/bin/python3.10
 python3 -m pip install -r requirements.txt
 ```
 
-
+# Reference:
+* Mobile Net reference: https://github.com/tensorflow/examples/blob/master/lite/examples/model_personalization/transfer_learning/generate_training_model.py
 
