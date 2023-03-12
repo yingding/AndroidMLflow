@@ -14,7 +14,7 @@ def android_ml_pipeline(step_1, step_2):
 # define the global pipeline params
 pipeline_params = InputParams(
     tf_version="2.11.0", # used to assert the tensorflow version required for this pipeline
-    num_epochs=10, #100 num_epochs
+    num_epochs=100, #100 num_epochs
     batch_size=100, #100 batch_size
     show_logs=True #False # deactivate debug logs, and plotting for none interactive mode
 )
