@@ -12,4 +12,5 @@ python3 -m pip install -r requirements.txt
 
 # Reference:
 * Mobile Net reference: https://github.com/tensorflow/examples/blob/master/lite/examples/model_personalization/transfer_learning/generate_training_model.py
+* zenml custom data, model materializer: https://docs.zenml.io/advanced-guide/pipelines/materializers
 
