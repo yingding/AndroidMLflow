@@ -1,20 +1,14 @@
-from zenml.steps import step, BaseParameters
+from zenml.steps import step
+from steps.input_step import InputParams
+from steps.model_wrapper_materializer import ModelWrapperMaterializer
 
-class InputParams(BaseParameters):
-    """Input Params for pipeline"""
-    tf_version: str = ""
-    num_epochs: int = 100
-    batch_size: int = 100
-    show_logs: bool = False
+# from tensorflow.keras import Model as TF_Model
 
-@step
-def input_step(
-    params: InputParams
-) -> InputParams:
-    return params    
-
-@step
-def train_tf_model(params: InputParams) -> None: 
+# Model wrapper
+from utils.custom_model import Model as CustomModel 
+  
+@step(output_materializers=ModelWrapperMaterializer)
+def train_tf_model(params: InputParams) -> CustomModel:
     '''
     This model trains a fashion mnist model, and convert to tensorflow lite mode with the following exposed functions
     * train
@@ -114,3 +108,6 @@ def train_tf_model(params: InputParams) -> None:
         plt_func=plt.show,
         visiable=params.show_logs
     )
+
+    """return the trained model"""
+    return m
