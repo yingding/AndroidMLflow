@@ -5,6 +5,7 @@ class InputParams(BaseParameters):
     tf_version: str = ""
     num_epochs: int = 100
     batch_size: int = 100
+    show_logs: bool = False
 
 @step
 def input_step(
@@ -36,9 +37,15 @@ def train_tf_model(params: InputParams) -> None:
         display_training_loss,
         PlotLineData
     )
+    from utils.util import log as tag_log
+    def log(msg: str):
+        tag_log(
+            is_logging=params.show_logs,
+            tag="tf_training",
+            msg=msg
+        )
 
-    # print(f"Tensorflow verion: {tf.__version__}")
-    print(f"Tensorflow verion: {tf.version.VERSION}")
+    log(f"Tensorflow verion: {tf.version.VERSION}")
 
     # quick version check for this code
     assert tf.version.VERSION == params.tf_version # "2.11.0"
@@ -78,12 +85,13 @@ def train_tf_model(params: InputParams) -> None:
             print(f"Finished {i+1} epochs")
             print(f"   loss: {losses[i]:.3f}")
     
-    print("""saving model""")
+    log("""saving model checkpoint""")
     # Save the trained weights to a checkpoint, 
     current_model_path = create_default_tf_checkpoint_subfolder()
     if current_model_path is not None:
         m.save(f"{current_model_path}/model.ckpt")
-    print("""model saved """)
+    
+    log("""saving model performance log""")
     # Save epochs and losses for later use
     data_exchange_path = create_default_data_exchange_path(exchange_file_name="previous_training_results_dataclass")
     previous_training_results = PreviousTrainingResults(epochs=epochs, losses=losses)
@@ -95,6 +103,14 @@ def train_tf_model(params: InputParams) -> None:
     logits_original.dump(logits_tf_original_path)
 
     ###
-    # Plot the training result
+    # Plot the training result, only in debug enabled mode
     ###
-    display_training_loss(lines=[PlotLineData(x_values=epochs, y_values=losses, label="Pre-training")], plt_func=plt.show)
+    display_training_loss(
+        lines=[PlotLineData(
+            x_values=previous_training_results.epochs, 
+            y_values=previous_training_results.losses, 
+            label="Pre-training")
+        ], 
+        plt_func=plt.show,
+        visiable=params.show_logs
+    )

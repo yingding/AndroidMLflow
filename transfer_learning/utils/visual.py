@@ -32,19 +32,19 @@ class PlotLineData():
     label: str  
 
 def display_training_loss(lines: list[PlotLineData], xlabel: str="Epoch", ylabel: str = 'Loss [Cross Entropy]',
-    plt_func: callable = None
+    plt_func: callable = None, visiable: bool = True
 ):
     # assert len(epochs) == len(losses)
-    
-    for line in lines:
-        plt.plot(line.x_values, line.y_values, label=line.label)
-    plt.ylim([0, max(plt.ylim())])
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.legend()
-    if plt_func is not None:
-        assert callable(getattr(plt, plt_func.__name__))
-        plt_func()
+    if visiable:
+        for line in lines:
+            plt.plot(line.x_values, line.y_values, label=line.label)
+        plt.ylim([0, max(plt.ylim())])
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.legend()
+        if plt_func is not None:
+            assert callable(getattr(plt, plt_func.__name__))
+            plt_func()
 
 
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',

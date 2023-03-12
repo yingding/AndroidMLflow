@@ -14,6 +14,13 @@ def get_local_time_str(target_tz_str: str = "Europe/Berlin", format_str: str = "
     target_dt = datetime.now(target_tz)
     return datetime.strftime(target_dt, format_str)
 
+def log(is_logging: bool, msg: str, tag: str = ""):
+    """
+    this method is a print wrapper to show the output
+    """
+    if is_logging:
+        print(f"{tag}: {msg}")
+
 
 class MultiEpochProgbarLogger(tensorflow.keras.callbacks.ProgbarLogger):
     def __init__(self, count_mode='samples', stateful_metrics=None, display_per_epoch=1000, verbose=1):
