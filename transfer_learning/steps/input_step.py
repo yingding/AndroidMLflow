@@ -7,7 +7,7 @@ class InputParams(BaseParameters):
     batch_size: int = 100
     show_logs: bool = False
 
-
+# this step is redundant, if the input params are specified at runtime for every steps
 @step
 def input_step(
     params: InputParams
