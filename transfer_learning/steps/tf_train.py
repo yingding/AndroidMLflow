@@ -97,7 +97,7 @@ def train_tf_model(params: InputParams) -> None:
     previous_training_results = PreviousTrainingResults(epochs=epochs, losses=losses)
     previous_training_results.dump(data_exchange_path)
 
-    # save the original logits, the logits is a list of probabilities
+    # save the original training set label as logits, the logits is a list of probabilities
     logits_tf_original_path = create_default_data_exchange_path(exchange_file_name="logits_tf_original")
     logits_original = SerializableList(m.infer(x=train_images[:1])['logits'][0])
     logits_original.dump(logits_tf_original_path)
